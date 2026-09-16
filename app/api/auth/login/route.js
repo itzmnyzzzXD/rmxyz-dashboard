@@ -10,8 +10,8 @@ export async function GET() {
   url.searchParams.set('response_type', 'code');
   url.searchParams.set('redirect_uri', redirect);
   url.searchParams.set('scope', 'identify guilds');
+  url.searchParams.set('state', state);
   const response = NextResponse.redirect(url);
   response.cookies.set('oauth_state', state, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: 600, path: '/' });
-  url.searchParams.set('state', state);
-  return NextResponse.redirect(url);
+  return response;
 }
